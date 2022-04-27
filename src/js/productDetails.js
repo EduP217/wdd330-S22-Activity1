@@ -2,7 +2,7 @@ import {
   getLocalStorage,
   setLocalStorage,
   validateKeyInLocalStorage,
-} from "./utils";
+} from './utils';
 export default class ProductDetails {
   constructor(productId, dataSource) {
     this.productId = productId;
@@ -16,20 +16,20 @@ export default class ProductDetails {
     // once the HTML is rendered we can add a listener to Add to Cart button
     // Notice the .bind(this). Our callback will not work if we don't include that line. Review the readings from this week on 'this' to understand why.
     this.product = await this.dataSource.findProductById(this.productId);
-    document.querySelector("main").innerHTML = this.renderProductDetails();
+    document.querySelector('main').innerHTML = this.renderProductDetails();
     // add listener to Add to Cart button
     document
-      .getElementById("addToCart")
-      .addEventListener("click", this.addToCart.bind(this));
+      .getElementById('addToCart')
+      .addEventListener('click', this.addToCart.bind(this));
   }
 
   addToCart() {
     let cartItems = [];
-    if (validateKeyInLocalStorage("so-cart")) {
-      cartItems = getLocalStorage("so-cart");
+    if (validateKeyInLocalStorage('so-cart')) {
+      cartItems = getLocalStorage('so-cart');
     }
     cartItems.push(this.product);
-    setLocalStorage("so-cart", cartItems);
+    setLocalStorage('so-cart', cartItems);
   }
 
   renderProductDetails() {
