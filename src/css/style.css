@@ -115,11 +115,44 @@ button {
 .cart {
   padding-top: 1em;
   position: relative;
-  text-align: center;
+}
+
+.cart:before {
+  content:attr(numberInCart);
+  background: red;
+  color: white;
+  padding: 4px;
+  padding-left: 7px;
+  padding-right: 7px;
+  text-align: justify;
+  border-radius: 50%;
+  font-size: 10px;
+  float: right;
+  margin-top: -20%;
+  font-family: monospace
+}
+
+.cart.shake {
+  animation: shakeCart .4s ease-in-out forwards;
+}
+
+@keyframes shakeCart {
+  25% {
+    transform:translateX(6px)
+  }
+  50% {
+    transform:translateX(-4px);
+  }
+  75% {
+    transform:translateX(2px);
+  }
+  100% {
+    transform:translateX(0);
+  }
 }
 
 .cart svg {
-  width: 25px;
+  width: 30px;
 }
 
 .cart:hover svg {
