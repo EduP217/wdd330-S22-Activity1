@@ -32,3 +32,11 @@ export function getParams(param) {
 export function validateKeyInLocalStorage(key) {
   return localStorage.key(key);
 }
+
+export function renderListWithTemplate(template, parentElement, list, callback){
+  list.forEach(product => {
+    const clone = template.content.cloneNode(true);
+    const hydratedTemplate = callback(clone, product);
+    parentElement.appendChild(hydratedTemplate);
+  })
+}
