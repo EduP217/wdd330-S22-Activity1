@@ -2,11 +2,17 @@ function getLocalStorage(key) {
   return JSON.parse(localStorage.getItem(key));
 }
 
+function validateKeyInLocalStorage(key) {
+  return localStorage.key(key);
+}
+
 function getCartContents() {
   // let markup = '';
-  const cartItems = getLocalStorage('so-cart');
-  const htmlItems = cartItems.map((item) => renderCartItem(item));
-  document.querySelector('.product-list').innerHTML = htmlItems.join('');
+  if (validateKeyInLocalStorage('so-cart')) {
+    const cartItems = getLocalStorage('so-cart');
+    const htmlItems = cartItems.map((item) => renderCartItem(item));
+    document.querySelector('.product-list').innerHTML = htmlItems.join('');
+  }
   // document.querySelector('.product-list').innerHTML = renderCartItem(cartItems);
 }
 
