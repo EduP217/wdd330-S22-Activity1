@@ -8,6 +8,6 @@ alert.init();
 
 const tents = new ProductData('tents');
 const listElement = document.querySelector('.product-list');
-const list = new list('tents', tents, listElement);
+const list = new ProductList('tents', tents, listElement);
 
 list.init();
