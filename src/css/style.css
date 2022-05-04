@@ -246,3 +246,12 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
+
+.category-container {
+  display: flex;
+  width: 100%;
+}
+
+.category-item {
+  flex-basis: 25%;
+}
