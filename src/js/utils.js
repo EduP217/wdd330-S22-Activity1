@@ -40,3 +40,7 @@ export function renderListWithTemplate(template, parent, list, callback) {
         parent.appendChild(templateWithData);
     })
 }
+
+export function countDiscount(oldPrice, newPrice) {
+    return Math.round(((oldPrice - newPrice) / oldPrice) * 100);
+}

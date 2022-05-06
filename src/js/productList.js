@@ -1,4 +1,4 @@
-import { renderListWithTemplate } from './utils.js';
+import { renderListWithTemplate, countDiscount } from './utils.js';
 
 export default class ProductListing {
     constructor(category, dataSource, listElement) {
@@ -17,6 +17,7 @@ export default class ProductListing {
     onlyFour(list) {
         return list.filter((item, index) => index < 4);
     }
+
     prepareTemplate(template, product) {
         template.querySelector('a').href += product.Id;
         template.querySelector('img').src = product.Images.PrimaryMedium;
@@ -24,24 +25,16 @@ export default class ProductListing {
         template.querySelector('.card__brand').textContent = product.Brand.Name;
         template.querySelector('.card__name').textContent = product.NameWithoutBrand;
         template.querySelector('.product-card__price').textContent += product.FinalPrice;
+        template.querySelector('.product-card__old-price').textContent += product.SuggestedRetailPrice;
+        template.querySelector('.product-card__discount-amount').textContent += countDiscount(product.SuggestedRetailPrice, product.FinalPrice);
         return template;
     }
+
     renderList(list) {
-            // make sure the list is empty
-            this.listElement.innerHTML = '';
-            //get the template
-            const template = document.getElementById('product-card-template');
-            renderListWithTemplate(template, this.listElement, list, this.prepareTemplate);
-
-        }
-        // original method before moving the template logic to utils.js
-        // renderList(list) {
-        // const template = document.getElementById('product-card-template');
-        // list.forEach(product => {
-        //   const clone = template.content.cloneNode(true);
-        //   const hydratedTemplate = this.prepareTemplate(clone, product);
-        //   this.listElement.appendChild(hydratedTemplate);
-        // })
-        // }
-
+        // make sure the list is empty
+        this.listElement.innerHTML = '';
+        //get the template
+        const template = document.getElementById('product-card-template');
+        renderListWithTemplate(template, this.listElement, list, this.prepareTemplate);
+    }
 }

@@ -6,10 +6,9 @@ import { getParams } from './utils.js';
 
 
 const category = getParams('category');
-console.log(category)
-document.getElementById('product-category').innerHTML = category;
-const tents = new ProductData();
-const listElement = document.querySelector('.product-list');
-const list = new ProductList(category, tents, listElement);
 
+document.getElementById('product-category').innerHTML = category;
+const data = new ProductData();
+const listElement = document.querySelector('.product-list');
+const list = new ProductList(category, data, listElement);
 list.init();
