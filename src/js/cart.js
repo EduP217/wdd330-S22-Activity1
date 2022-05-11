@@ -1,38 +1,8 @@
-function getLocalStorage(key) {
-  return JSON.parse(localStorage.getItem(key));
-}
+import { loadHeaderFooter } from './utils.js';
+import ShoppingCart from './shoppingCart.js';
 
-function validateKeyInLocalStorage(key) {
-  return localStorage.key(key);
-}
+loadHeaderFooter();
 
-function getCartContents() {
-  // let markup = '';
-  if (validateKeyInLocalStorage('so-cart')) {
-    const cartItems = getLocalStorage('so-cart');
-    const htmlItems = cartItems.map((item) => renderCartItem(item));
-    document.querySelector('.product-list').innerHTML = htmlItems.join('');
-  }
-  // document.querySelector('.product-list').innerHTML = renderCartItem(cartItems);
-}
-
-function renderCartItem(item) {
-  const newItem = `<li class="cart-card divider">
-  <a href="#" class="cart-card__image">
-    <img
-      src="${item.Image}"
-      alt="${item.Name}"
-    />
-  </a>
-  <a href="#">
-    <h2 class="card__name">${item.Name}</h2>
-  </a>
-  <p class="cart-card__color">${item.Colors[0].ColorName}</p>
-  <p class="cart-card__quantity">qty: 1</p>
-  <p class="cart-card__price">$${item.FinalPrice}</p>
-</li>`;
-  console.log(newItem);
-  return newItem;
-}
-
-getCartContents();
+const listElement = document.querySelector('.product-list');
+const shoppingCart = new ShoppingCart(listElement);
+shoppingCart.init();
