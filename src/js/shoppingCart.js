@@ -6,6 +6,7 @@ export default class ShoppingCart {
   }
   async init() {
     const list = getLocalStorage('so-cart');
+    //console.table(list);
     this.renderList(list);
   }
   prepareTemplate(template, product) {
