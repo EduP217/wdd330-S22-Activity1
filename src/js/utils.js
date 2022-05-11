@@ -77,3 +77,11 @@ export async function loadHeaderFooter() {
 export function countDiscount(oldPrice, newPrice) {
   return Math.round(((oldPrice - newPrice) / oldPrice) * 100);
 }
+
+export function calculateTotalAmount(list) {
+  let totalAmount = 0;
+  list.forEach((item) => {
+    totalAmount += item.FinalPrice;
+  });
+  return totalAmount;
+}

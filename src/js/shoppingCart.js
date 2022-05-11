@@ -1,4 +1,4 @@
-import { renderListWithTemplate, getLocalStorage } from './utils.js';
+import { renderListWithTemplate, getLocalStorage, calculateTotalAmount } from './utils.js';
 
 export default class ShoppingCart {
   constructor(listElement) {
@@ -6,8 +6,15 @@ export default class ShoppingCart {
   }
   async init() {
     const list = getLocalStorage('so-cart');
+    let cartIsEmpty = list != null;
+    console.log(cartIsEmpty);
     //console.table(list);
-    this.renderList(list);
+    if(cartIsEmpty){
+      this.renderList(list);
+      let totalAmount = calculateTotalAmount(list);
+      console.log(totalAmount);
+      this.displayTotalAmount(totalAmount);
+    }
   }
   prepareTemplate(template, product) {
     template.querySelector('a').href += product.Id;
@@ -30,5 +37,9 @@ export default class ShoppingCart {
       list,
       this.prepareTemplate
     );
+  }
+  displayTotalAmount(total){
+    document.querySelector('.cart-total').textContent += `$${total}`;
+    document.querySelector('.cart-footer').classList.remove('hide');
   }
 }
