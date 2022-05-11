@@ -161,6 +161,7 @@ button {
   padding: 0.5em;
   border: 1px solid var(--light-grey);
   max-width: 250px;
+  position: relative;
 }
 
 .product-card h2,
@@ -245,4 +246,37 @@ button {
 footer {
   font-size: var(--small-font);
   padding: 1em;
+}
+
+.category-container {
+  display: flex;
+  width: 100%;
+}
+
+.category-item {
+  flex-basis: 25%;
+}
+
+.product-card__old-price {
+  color: red;
+  text-decoration: line-through;
+}
+
+.product-card__link {
+  position: relative;
+}
+
+.product-card__discount {
+  display: inline-block;
+  padding: 15px 4px;
+  position: absolute;
+  right: -10px;
+  top: -10px;
+  background: red;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
 }
