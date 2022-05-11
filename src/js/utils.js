@@ -42,12 +42,12 @@ export function validateKeyInLocalStorage(key) {
 }
 
 export function renderListWithTemplate(template, parent, list, callback) {
-  list.forEach(item => {
+  list.forEach((item) => {
     //console.log(item.id);
     const clone = template.content.cloneNode(true);
     const templateWithData = callback(clone, item);
     parent.appendChild(templateWithData);
-  })
+  });
 }
 
 export function renderWithTemplate(template, parent, data, callback) {
@@ -72,4 +72,8 @@ export async function loadHeaderFooter() {
   const footerElement = document.getElementById('main-footer');
   renderWithTemplate(headerTemplate, headerElement);
   renderWithTemplate(footerTemplate, footerElement);
+}
+
+export function countDiscount(oldPrice, newPrice) {
+  return Math.round(((oldPrice - newPrice) / oldPrice) * 100);
 }
