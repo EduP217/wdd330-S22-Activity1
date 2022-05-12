@@ -86,13 +86,26 @@ export function calculateTotalAmount(list) {
   return totalAmount;
 }
 
+// takes a form element and returns an object where the key is the "name" of the form input.
 export function formDataToJSON(formElement) {
-  const formData = new FormData(formElement);
-  const jsonData = {};
+  const formData = new FormData(formElement),
+    convertedJSON = {};
 
-  formData.forEach((value, key) => {
-    jsonData[key] = value;
+  formData.forEach(function (value, key) {
+    convertedJSON[key] = value;
   });
 
-  return jsonData;
+  return convertedJSON;
+}
+
+export function formatDateToLocal(date) {
+  return `${date.getFullYear()}-${leadZeros(
+    date.getMonth() + 1
+  )}-${date.getDate()}T${leadZeros(date.getHours())}:${leadZeros(
+    date.getMinutes()
+  )}:${leadZeros(date.getSeconds())}.${date.getMilliseconds()}Z`;
+}
+
+export function leadZeros(num) {
+  return num.toString().padStart(2, '0');
 }
