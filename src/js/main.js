@@ -1,10 +1,9 @@
-import ProductData from './productData.js';
-import ProductList from './productList.js';
+import ExternalServices from './ExternalServices.js';
 import Alert from './alert.js';
 import { loadHeaderFooter } from './utils.js';
 
 loadHeaderFooter();
 
-const dataSource = new ProductData('alerts');
+const dataSource = new ExternalServices('alerts');
 const alert = new Alert(dataSource);
 alert.init();

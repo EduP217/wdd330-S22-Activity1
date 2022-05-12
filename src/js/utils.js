@@ -85,3 +85,14 @@ export function calculateTotalAmount(list) {
   });
   return totalAmount;
 }
+
+export function formDataToJSON(formElement) {
+  const formData = new FormData(formElement);
+  const jsonData = {};
+
+  formData.forEach((value, key) => {
+    jsonData[key] = value;
+  });
+
+  return jsonData;
+}
