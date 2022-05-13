@@ -1,4 +1,4 @@
-import { getLocalStorage } from '../../build/js/utils.js';
+import { getLocalStorage } from './utils.js';
 import ExternalServices from './ExternalServices.js';
 
 const services = new ExternalServices();
