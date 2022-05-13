@@ -2,7 +2,9 @@ import {
   getLocalStorage,
   calculateTotalAmount,
   formDataToJSON,
-  formatDateToLocal
+  formatDateToLocal,
+  removeLocalStorage,
+  alertMessage
 } from './utils';
 import ExternalServices from './ExternalServices.js';
 
@@ -68,7 +70,17 @@ export default class CheckoutProcess {
     json.items = packageItems(this.list);
     console.log(json);
     // call the checkout method in our ExternalServices module and send it our data object.
-    const res = await services.checkout(json);
-    console.log(res);
+
+    try {
+      const res = await services.checkout(json);
+      console.log(res);
+      removeLocalStorage(this.key);
+      window.location.assign('/checkout/checkedout.html');
+    } catch(err) {
+      console.log(err);
+      for(let key in err.message){
+        alertMessage(err.message[key], true);
+      }
+    }
   }
 }

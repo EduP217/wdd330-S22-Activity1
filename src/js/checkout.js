@@ -16,6 +16,10 @@ document
   .querySelector('form[name="checkout"]')
   .addEventListener('submit', (e) => {
     e.preventDefault();
-    //console.log("preventDefault");
-    checkoutProcess.checkout('checkout');
+    var myForm = document.forms[0];
+    var chk_status = myForm.checkValidity();
+    myForm.reportValidity();
+    if(chk_status){
+      checkoutProcess.checkout('checkout');
+    }
   });

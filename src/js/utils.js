@@ -21,6 +21,10 @@ export function getLocalStorage(key) {
 export function setLocalStorage(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
 }
+// save data to local storage
+export function removeLocalStorage(key) {
+  localStorage.removeItem(key);
+}
 // set a listener for both touchend and click
 export function setClick(selector, callback) {
   qs(selector).addEventListener('touchend', (event) => {
@@ -108,4 +112,31 @@ export function formatDateToLocal(date) {
 
 export function leadZeros(num) {
   return num.toString().padStart(2, '0');
+}
+
+export function alertMessage(message, scroll=true) {
+  // create element to hold our alert
+  const alert = document.createElement('div');
+  // add a class to style the alert
+  alert.classList.add('alert');
+  // set the contents. You should have a message and an X or something the user can click on to remove
+  alert.innerHTML = message;
+  const close = document.createElement('span');
+  close.innerHTML = 'X';
+  close.classList.add('close');
+  alert.appendChild(close);
+  // add a listener to the alert to see if they clicked on the X
+  // if they did then remove the child
+  alert.addEventListener('click', function(e) {
+      if(e.target.matches('.close')) { // how can we tell if they clicked on our X or on something else?  hint: check out e.target.tagName or e.target.innerText
+        main.removeChild(this);
+      }
+  })
+  // add the alert to the top of main
+  const main = document.querySelector('main');
+  main.prepend(alert);
+  // make sure they see the alert by scrolling to the top of the window
+  //we may not always want to do this...so default to scroll=true, but allow it to be passed in and overridden.
+  if(scroll)
+    window.scrollTo(0,0);
 }
