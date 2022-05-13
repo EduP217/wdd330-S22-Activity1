@@ -25,11 +25,12 @@ export default class ExternalServices {
     };
     return await fetch(baseURL + 'checkout/', options).then(this.convertToJson);
   }
-  convertToJson(res) {
-    if (res.ok) {
-      return res.json();
-    } else {
-      throw new Error('Bad Response');
+  async convertToJson(res) {
+    const jsonResponse = await res.json();
+    console.log(jsonResponse);
+    if(res.status == 400){
+      throw { name: 'servicesError', message: jsonResponse };
     }
+    return jsonResponse;
   }
 }

@@ -45,5 +45,6 @@ export default class ShoppingCart {
   displayTotalAmount(total) {
     document.querySelector('.cart-total').textContent += `$${total}`;
     document.querySelector('.cart-footer').classList.remove('hide');
+    document.querySelector('.btn-checkout').classList.remove('hide');
   }
 }
