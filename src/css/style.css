@@ -93,7 +93,8 @@ header {
   color: var(--tertiary-color);
 }
 
-button {
+button,
+.button {
   padding: 0.5em 2em;
   background-color: var(--secondary-color);
   color: white;
@@ -283,4 +284,48 @@ footer {
 
 .hide {
   visibility: hidden;
+}
+
+.checkout-form {
+  padding: 0.5em;
+  width: 100%;
+  max-width: 325px;
+}
+
+.checkout-form label {
+  display: block;
+}
+
+.checkout-form input {
+  width: 100%;
+  font-size: 1.2em;
+  margin-bottom: 1rem;
+}
+
+.checkout-summary > ul {
+  padding-left: 0;
+  list-style-type: none;
+  margin: 0;
+  padding-bottom: 0.5rem;
+}
+
+.checkout-summary li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+}
+
+.checkout-summary li p {
+  margin: 0;
+}
+
+.checkout-summary input {
+  width: 25%;
+  font-size: 1em;
+}
+
+.checkout-form fieldset {
+  margin-bottom: 1rem;
+  padding-top: 1rem;
 }
