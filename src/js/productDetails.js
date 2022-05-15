@@ -2,7 +2,7 @@ import {
   getLocalStorage,
   setLocalStorage,
   validateKeyInLocalStorage,
-  countDiscount
+  countDiscount,
 } from './utils';
 export default class ProductDetails {
   constructor(productId, dataSource) {
@@ -39,10 +39,17 @@ export default class ProductDetails {
     <section class="product-detail">
       <h3>${this.product.Brand.Name}</h3>
       <h2 class="divider">${this.product.NameWithoutBrand}</h2>
-      <div class="is-relative"><span class="product-card__discount">-<span class="product-card__discount-amount">${countDiscount(this.product.SuggestedRetailPrice,this.product.FinalPrice)}</span>%</span></div>
-      <img class="divider" src="${this.product.Images.PrimaryLarge}" alt="${this.product.NameWithoutBrand}" />
+      <div class="is-relative"><span class="product-card__discount">-<span class="product-card__discount-amount">${countDiscount(
+        this.product.SuggestedRetailPrice,
+        this.product.FinalPrice
+      )}</span>%</span></div>
+      <img class="divider" src="${this.product.Images.PrimaryLarge}" alt="${
+      this.product.NameWithoutBrand
+    }" />
       <p class="product-card__price"><b>$${this.product.FinalPrice}</b></p>
-      <p class="product-card__old-price"><b>$${this.product.SuggestedRetailPrice.toFixed(2)}</b></p>
+      <p class="product-card__old-price"><b>$${this.product.SuggestedRetailPrice.toFixed(
+        2
+      )}</b></p>
       <p class="product__color">${this.product.Colors[0].ColorName}</p>
       <p class="product__description">${this.product.DescriptionHtmlSimple}</p>
       <div class="product-detail__add">

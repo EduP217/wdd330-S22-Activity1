@@ -28,7 +28,7 @@ export default class ExternalServices {
   async convertToJson(res) {
     const jsonResponse = await res.json();
     console.log(jsonResponse);
-    if(res.status == 400){
+    if (res.status == 400) {
       throw { name: 'servicesError', message: jsonResponse };
     }
     return jsonResponse;
