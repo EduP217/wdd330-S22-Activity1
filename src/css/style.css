@@ -345,3 +345,7 @@ footer {
 .close:hover {
   font-weight: bold;
 }
+
+.is-relative {
+  position: relative;
+}
