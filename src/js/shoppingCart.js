@@ -2,23 +2,18 @@ import {
   renderListWithTemplate,
   getLocalStorage,
   calculateTotalAmount,
+  validateKeyInLocalStorage,
+  setLocalStorage,
 } from './utils.js';
 
 export default class ShoppingCart {
   constructor(listElement) {
+    this.key = 'so-cart';
     this.listElement = listElement;
   }
   async init() {
-    const list = getLocalStorage('so-cart');
-    let cartIsEmpty = list != null;
-    console.log(cartIsEmpty);
-    //console.table(list);
-    if (cartIsEmpty) {
-      this.renderList(list);
-      let totalAmount = calculateTotalAmount(list);
-      console.log(totalAmount);
-      this.displayTotalAmount(totalAmount);
-    }
+    const cartItems = getLocalStorage(this.key);
+    this.renderList(cartItems);
   }
   prepareTemplate(template, product) {
     template.querySelector('a').href += product.Id;
@@ -30,21 +25,48 @@ export default class ShoppingCart {
     //template.querySelector('p.cart-card__quantity').textContent += product.FinalPrice;
     template.querySelector('p.cart-card__price').textContent +=
       product.FinalPrice;
+    template.querySelector('span.close').setAttribute('data-id', product.Id);
     return template;
+  }
+  removeItemFromCart(c) {
+    //console.log(c);
+    //console.log(this);
+    let productId = c.getAttribute('data-id');
+    console.log(productId);
+    let cartItems = [];
+    if (validateKeyInLocalStorage(this.key)) {
+      cartItems = getLocalStorage(this.key);
+    }
+    cartItems = cartItems.filter((i) => i.Id != productId);
+    this.displayAmountCheckout(cartItems);
+    setLocalStorage(this.key, cartItems);
+    const itemNode = c.parentNode;
+    const rootNode = itemNode.parentNode;
+    rootNode.removeChild(itemNode);
   }
   renderList(list) {
     this.listElement.innerHTML = '';
-    const template = document.getElementById('product-cart-card-template');
-    renderListWithTemplate(
-      template,
-      this.listElement,
-      list,
-      this.prepareTemplate
-    );
+    this.displayAmountCheckout(list);
+    let cartIsEmpty = list == null || list.length == 0;
+    if (!cartIsEmpty) {
+      const template = document.getElementById('product-cart-card-template');
+      renderListWithTemplate(
+        template,
+        this.listElement,
+        list,
+        this.prepareTemplate
+      );
+    }
   }
-  displayTotalAmount(total) {
-    document.querySelector('.cart-total').textContent += `$${total}`;
-    document.querySelector('.cart-footer').classList.remove('hide');
-    document.querySelector('.btn-checkout').classList.remove('hide');
+  displayAmountCheckout(list) {
+    let totalAmount = calculateTotalAmount(list);
+    document.querySelector('.cart-total').textContent = `$${totalAmount}`;
+    if (totalAmount > 0){
+      document.querySelector('.cart-footer').classList.remove('hide');
+      document.querySelector('.btn-checkout').classList.remove('hide');
+    } else {
+      document.querySelector('.cart-footer').classList.add('hide');
+      document.querySelector('.btn-checkout').classList.add('hide');
+    }    
   }
 }
