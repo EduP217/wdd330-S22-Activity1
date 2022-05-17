@@ -1,10 +1,11 @@
 import { renderListWithTemplate, countDiscount } from './utils.js';
 
 export default class ProductListing {
-  constructor(category, dataSource, listElement) {
+  constructor(category, search, dataSource, listElement) {
     // We passed in this information to make our class as reusable as possible.
     // Being able to define these things when we use the class will make it very flexible
     this.category = category;
+    this.search = search;
     this.dataSource = dataSource;
     this.listElement = listElement;
   }
