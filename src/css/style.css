@@ -345,3 +345,51 @@ footer {
 .close:hover {
   font-weight: bold;
 }
+
+.nav-options {
+  display: flex;
+  column-gap: 1rem;
+}
+
+.admin {
+  width: 30px;
+  padding-top: 0.8em;
+}
+
+.login-form {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 450px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+.login-form label, .login-form input {
+  width: 100%;
+}
+.login-form input {
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  box-sizing: border-box;
+}
+.table-container {
+  padding: 1rem;
+  overflow: auto;
+}
+.table-orders {
+  width: 100%;
+  max-width: 650px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  border-collapse: collapse;
+}
+.table-orders th {
+  background-color: var(--tertiary-color);
+  border: 2px solid var(--dark-grey);
+}
+.table-orders .order-body td {
+  text-align: center;
+  border: 2px solid var(--dark-grey);
+}
+.table-orders .order-body tr:nth-child(even) {
+  background-color: var(--light-grey);
+}
