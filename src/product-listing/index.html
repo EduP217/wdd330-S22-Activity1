@@ -28,6 +28,13 @@
     <main>
       <section class="products">
         <h2>Top Products: <span id="product-category"></span></h2>
+        <span>Sort by: </span>
+        <label>
+          <select id="sorting" data-current-sorting="sortByName">
+            <option value="sortByName">name</option>
+            <option value="sortByPrice">price</option>
+          </select>
+        </label>
         <ul class="product-list"></ul>
       </section>
     </main>

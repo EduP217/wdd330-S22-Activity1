@@ -12,6 +12,13 @@ export default class ProductListing {
     // our dataSource will return a Promise...so we can use await to resolve it.
     let list = await this.dataSource.getData(this.category);
     list = this.onlyFour(list);
+    list = list.sort((a, b) => a.NameWithoutBrand.toLowerCase().localeCompare(b.NameWithoutBrand.toLowerCase()));
+    this.renderList(list);
+  }
+  async sortByPrice() {
+    let list = await this.dataSource.getData(this.category);
+    list = this.onlyFour(list);
+    list = list.sort((itemA, itemB) => itemA.FinalPrice - itemB.FinalPrice);
     this.renderList(list);
   }
   onlyFour(list) {
