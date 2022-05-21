@@ -4,7 +4,7 @@ import {
   formDataToJSON,
   formatDateToLocal,
   removeLocalStorage,
-  alertMessage
+  alertMessage,
 } from './utils';
 import ExternalServices from './ExternalServices.js';
 
@@ -13,7 +13,7 @@ const services = new ExternalServices();
 // takes the items currently stored in the cart (localstorage) and returns them in a simplified form.
 function packageItems(items) {
   // convert the list of products from localStorage to the simpler form required for the checkout process. Array.map would be perfect for this.
-  const checkoutItems = items.map((item) => {
+  const checkoutItems = items.map(function (item) {
     //console.log(item);
     return {
       id: item.Id,
@@ -42,22 +42,33 @@ export default class CheckoutProcess {
   calculateItemSummary() {
     // calculate and display the total amount of the items in the cart, and the number of items.
     this.itemTotal = calculateTotalAmount(this.list);
-    document.querySelector(this.outputSelector + ' #cartTotal').innerHTML = `$${this.itemTotal}`;
-    document.querySelector(this.outputSelector + ' #num-items').innerHTML = this.list.length;
+    document.querySelector(
+      this.outputSelector + ' #cartTotal'
+    ).innerHTML = `$${this.itemTotal}`;
+    document.querySelector(
+      this.outputSelector + ' #num-items'
+    ).innerHTML = this.list.length;
   }
   calculateOrdertotal() {
     // calculate the shipping and tax amounts. Then use them to along with the cart total to figure out the order total
-    this.shipping = 10 + ((this.list.length - 1) * 2);
+    this.shipping = 10 + (this.list.length - 1) * 2;
     this.tax = (parseFloat(this.itemTotal) * 0.06).toFixed(2);
     // display the totals.
-    this.orderTotal = (parseFloat(this.itemTotal) + parseFloat(this.shipping) + parseFloat(this.tax)).toFixed(2);
+    this.orderTotal = (
+      parseFloat(this.itemTotal) +
+      parseFloat(this.shipping) +
+      parseFloat(this.tax)
+    ).toFixed(2);
     this.displayOrderTotals();
   }
   displayOrderTotals() {
     // once the totals are all calculated display them in the order summary page
-    document.querySelector(this.outputSelector + ' #shipping').innerText = '$' + this.shipping;
-    document.querySelector(this.outputSelector + ' #tax').innerText = '$' + this.tax;
-    document.querySelector(this.outputSelector + ' #orderTotal').innerText = '$' + this.orderTotal;
+    document.querySelector(this.outputSelector + ' #shipping').innerText =
+      '$' + this.shipping;
+    document.querySelector(this.outputSelector + ' #tax').innerText =
+      '$' + this.tax;
+    document.querySelector(this.outputSelector + ' #orderTotal').innerText =
+      '$' + this.orderTotal;
   }
   async checkout(form) {
     // build the data object from the calculated fields, the items in the cart, and the information entered into the form
@@ -76,9 +87,9 @@ export default class CheckoutProcess {
       console.log(res);
       removeLocalStorage(this.key);
       window.location.assign('/checkout/checkedout.html');
-    } catch(err) {
+    } catch (err) {
       console.log(err);
-      for(let key in err.message){
+      for (let key in err.message) {
         alertMessage(err.message[key], true);
       }
     }

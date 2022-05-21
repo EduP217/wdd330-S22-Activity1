@@ -28,9 +28,28 @@ export default class ExternalServices {
   async convertToJson(res) {
     const jsonResponse = await res.json();
     console.log(jsonResponse);
-    if(res.status == 400){
+    if (res.status == 400) {
       throw { name: 'servicesError', message: jsonResponse };
     }
     return jsonResponse;
+  }
+  async loginRequest(creds) {
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(creds),
+    };
+    return fetch(baseURL + 'login', options).then(this.convertToJson);
+  }
+  async getOrders(token) {
+    const options = {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    }
+    return await fetch(baseURL + 'orders', options).then(this.convertToJson);
   }
 }

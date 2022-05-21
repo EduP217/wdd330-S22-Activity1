@@ -4,6 +4,7 @@ import { loadHeaderFooter } from './utils.js';
 
 loadHeaderFooter();
 
-const dataSource = new ExternalServices('alerts');
-const alert = new Alert(dataSource);
+//const dataSource = new ExternalServices('alerts');
+//const alert = new Alert(dataSource);
+const alert = new Alert();
 alert.init();
