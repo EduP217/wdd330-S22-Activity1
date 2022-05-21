@@ -19,7 +19,7 @@ document
     var myForm = document.forms[0];
     var chk_status = myForm.checkValidity();
     myForm.reportValidity();
-    if(chk_status){
+    if (chk_status) {
       checkoutProcess.checkout('checkout');
     }
   });

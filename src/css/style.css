@@ -346,6 +346,10 @@ footer {
   font-weight: bold;
 }
 
+.is-relative {
+  position: relative;
+}
+
 .nav-options {
   display: flex;
   column-gap: 1rem;
@@ -393,3 +397,4 @@ footer {
 .table-orders .order-body tr:nth-child(even) {
   background-color: var(--light-grey);
 }
+

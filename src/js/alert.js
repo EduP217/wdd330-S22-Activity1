@@ -1,17 +1,20 @@
 export default class Alert {
-  constructor(dataSource) {
+  constructor() {
     this.alerts = [];
-    this.dataSource = dataSource;
   }
 
   async init() {
-    this.alerts = await this.dataSource.getData();
+    this.alerts = await this.getData();
     console.table(this.alerts);
     document
       .querySelector('main')
       .insertAdjacentHTML('afterbegin', this.renderHTMLElements());
   }
-
+  getData() {
+    return fetch('/json/alerts.json')
+      .then((res) => res.json())
+      .then((data) => data);
+  }
   renderHTMLElements() {
     let render = '<section class="alert-list">';
     this.alerts.forEach((a) => {
