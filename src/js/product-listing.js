@@ -11,3 +11,12 @@ const data = new ExternalServices();
 const listElement = document.querySelector('.product-list');
 const list = new ProductList(category, data, listElement);
 list.init();
+
+document.querySelector('#sorting').addEventListener('change', (event) => {
+  const value = event.target.value;
+  if (value === 'sortByPrice') {
+    list.sortByPrice();
+  } else if (value === 'sortByName') {
+    list.init();
+  }
+});
