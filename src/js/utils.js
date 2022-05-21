@@ -87,7 +87,7 @@ export function calculateTotalAmount(list) {
   list.forEach((item) => {
     totalAmount += item.FinalPrice;
   });
-  return totalAmount;
+  return totalAmount.toFixed(2);
 }
 
 // takes a form element and returns an object where the key is the "name" of the form input.
